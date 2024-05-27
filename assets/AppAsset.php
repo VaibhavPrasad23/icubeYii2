@@ -23,10 +23,13 @@ class AppAsset extends AssetBundle
         'css/site.css',
         'css/style.css',
         'css/zoo.css',
-        'css/imgManage.css'
+        'css/imgManage.css',
+        // 'css/zoo2.css'
+
     ];
     public $js = [
-        // 'js/imgslide.js'
+        'js/script.js',
+
     ];
     public $depends = [
         'yii\web\YiiAsset',
