@@ -1,0 +1,171 @@
+div.site-login{
+    
+   background-image: url("../image/indewal.jpg");
+    background-size: cover;
+    padding: 25px;
+    border-radius: 20px;
+    margin-left: 19%; 
+    margin-right: 15%;
+    align-self: center;
+
+}
+
+.d-flex.flex-column.h-100{
+   background-image: url("../image/walli2.jpg");
+   background-blend-mode: luminosity;
+}
+
+
+
+ div.col-lg-5{
+    padding-left: 30%;
+ }
+
+ /* *, *::before, *::after{
+    box-sizing: unset;
+ } */
+
+ .h1 , p {
+    text-align: center;
+ }
+
+
+ #vaah{
+    text-align: center;
+ }
+
+
+ div.account-create{
+   background-image: url("../image/www.jpg");
+   background-size: cover;
+    margin-left: 15%;
+    margin-right: 15%;
+    padding: 30px;
+    padding-left: 60px;
+    border-radius: 20px;
+ }
+
+
+ .form-control{
+    width: 90%;
+    
+ }
+
+
+ .site-index{
+   background-color: rgba(255, 255, 255, 0.932);
+   margin-left: 30%;
+   margin-right: 30%;
+   margin-top: 10%;
+   border-radius: 20px;
+   padding-top: 30px;
+   padding-bottom: 10px;
+   background-image: url("../image/indewal.jpg");
+   background-size: cover;
+}
+
+div.space{
+   color: black;
+}
+
+
+
+.btn.btn-primary{
+   margin-top: 20px;
+   margin-bottom: 20px;
+}
+
+.help-block{
+   color: rgb(207, 0, 0);
+   padding-left: 12px;
+   font-size: 14px;
+   font-family: 'Avantgarde', 'TeX Gyre Adventor', 'URW Gothic L', sans-serif;
+   opacity: 65%;
+   font-weight: bold
+}
+
+
+
+.rabbit{
+   /* display: none; */
+   z-index: +1;
+   margin-left: 850px;
+   margin-top: 450px;
+   height: 46.5%;
+   position: fixed;
+}
+
+.zoo{
+   padding: 30px;
+   border-radius: 20px;
+   color: rgb(0, 0, 0);
+   background-color: aliceblue;
+   text-align: start;
+   /* font-family: 'Geographweb', 'GeographEditWeb', sans-serif; */
+   border-color: black;
+   border:rgb(0, 0, 0);
+}
+
+
+
+
+.slider{
+   border-style: solid;
+   border-radius: 20px;
+   /* background-image: url("../image/cloud.jpg"); */
+   background-blend-mode: darken;
+   margin: auto;
+
+}
+
+.account-index, .account-update{
+
+   background-color: rgba(255, 255, 255, 0.932);
+   border-radius: 20px;
+   padding-top: 10px;
+   padding-bottom: 10px;
+   padding-right: 40px;
+   padding-left: 40px;
+}
+
+.mySlides{
+   border-style: solid;
+   border-radius: 20px;
+
+}
+
+.ng-nav-link.display-4{
+   font-size: medium;
+   font-weight: bold;
+   border:rgba(255, 255, 255, 0.932);
+   border-radius: 20px;
+}
+
+
+.col-md-6.text-center.text-md-start{
+font-style: italic;}
+
+.account-form{
+   
+   margin-left: 5%;
+   /* margin-right: 30%; */
+}
+
+
+.btn.btn-success2{
+margin-left: 40%;}
+
+.site-login{
+   margin-left: 20%;
+   margin-right: 35%;
+   margin-top: 40px;
+}
+
+.account-create > h1{
+   text-shadow: 3px;
+   font-weight: bolder;
+   -webkit-text-fill-color: rgb(255, 255, 255);
+   -webkit-text-stroke: 1.8px;
+   -webkit-text-stroke-color: black;
+
+}
