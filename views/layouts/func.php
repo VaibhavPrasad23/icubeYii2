@@ -79,7 +79,7 @@ function guest_page(){
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'Signup', 'url' => ['/site/signup']],
-            // ['label' => 'About', 'url' => ['/site/about']],
+
             Yii::$app->user->isGuest
                 ? ['label' => 'Login', 'url' => ['/site/login']]
                 : '<li class="nav-item">'
@@ -89,7 +89,8 @@ function guest_page(){
                         ['class' => 'nav-link btn btn-link logout']
                     )
                     . Html::endForm()
-                    . '</li>'
+                    . '</li>',
+                    ['label' => 'CurlPOST', 'url' => ['/site/signupcurl']],
         ]
     ]);
 

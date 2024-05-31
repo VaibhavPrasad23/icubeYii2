@@ -13,6 +13,7 @@ use app\models\ContactForm;
 use app\models\Account;
 use yii\web\NotFoundHttpException;
 use yii\data\ActiveDataProvider;
+use app\models\SignupForm;
 
 
 
@@ -320,6 +321,26 @@ class SiteController extends Controller
     }
 
 
+    public function  actionSignupcurl()
+    { 
+        $session = Yii::$app->session;
 
+        
+        $model = new SignupForm();
+   
+        if ($model->load(Yii::$app->request->post())&& $model->signup() ) 
+        {
+            $session->open();
+             $this->actionCreate();
+            return $this->redirect('login');
+        }
+        
+      
+        
+        $model->username = '';
+        $model->password = '';
+     
+        return $this->render('signup1',['model'=>$model]);
+    }
 
 }
