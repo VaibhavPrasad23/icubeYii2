@@ -14,7 +14,9 @@ use app\models\Account;
 use yii\web\NotFoundHttpException;
 use yii\data\ActiveDataProvider;
 use app\models\SignupForm;
-
+use app\model\User1;
+use yii\base\DynamicModel;
+use yii\helpers\ArrayHelper;
 
 
 /**
@@ -26,7 +28,7 @@ class SiteController extends Controller
      * @inheritDoc
      */
     
-  
+
 
     public function actionIndex()
     {
@@ -320,31 +322,5 @@ class SiteController extends Controller
         return $this->render('zoozoo');
     }
 
-
-    public function  actionSignupcurl()
-    { 
-       
-
-        
-        $model = new SignupForm();
-   
-        if ($model->load(Yii::$app->request->post())&& $model->signup() ) 
-        {
-            //  $this->actionCreate();
-            return $this->redirect('login');
-        }
-        
-      
-        
-        $model->username = '';
-        $model->password = '';
-     
-        return $this->render('signup1',['model'=>$model]);
-    }
-
-    public function actionShowallusers()
-    {
-
-    }
 
 }

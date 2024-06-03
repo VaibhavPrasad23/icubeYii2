@@ -90,7 +90,8 @@ function guest_page(){
                     )
                     . Html::endForm()
                     . '</li>',
-                    ['label' => 'CurlPOST', 'url' => ['/site/signupcurl']],
+                    ['label' => 'CurlPOST', 'url' => ['/curl/signupcurl']],
+                    ['label' => 'CurlAllDB', 'url' => ['/curl/showallusers']],
         ]
     ]);
 
