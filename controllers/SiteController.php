@@ -323,15 +323,14 @@ class SiteController extends Controller
 
     public function  actionSignupcurl()
     { 
-        $session = Yii::$app->session;
+       
 
         
         $model = new SignupForm();
    
         if ($model->load(Yii::$app->request->post())&& $model->signup() ) 
         {
-            $session->open();
-             $this->actionCreate();
+            //  $this->actionCreate();
             return $this->redirect('login');
         }
         
@@ -341,6 +340,11 @@ class SiteController extends Controller
         $model->password = '';
      
         return $this->render('signup1',['model'=>$model]);
+    }
+
+    public function actionShowallusers()
+    {
+
     }
 
 }

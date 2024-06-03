@@ -27,7 +27,7 @@ class SignupForm extends Model
      */
     public function signup()
     {
-        $user = User1::findByUsernamee($this->username);
+        $user = User1::UserSignup($this->username);
         if ($user === null) {
             
             return true;

@@ -10,24 +10,7 @@ class User1 extends ActiveRecord implements \yii\web\IdentityInterface
     public $authKey;
     public $accessToken;
 
-    
-//     private static $users = [
-//         '1' => [
-//             'id' => '1',
-//             'username' => 'vaibhav',
-//             'password' => 'ss',
-//             'authKey' => 'test100key',
-//             'accessToken' => '100-token',
-//         ],
-//         '101' => [
-//             'id' => '101',
-//             'username' => 'demo',
-//             'password' => 'demo',
-//             'authKey' => 'test101key',
-//             'accessToken' => '101-token',
-//         ],
-//     ];
-    
+
     public static function tableName()
     {
         return'login';
@@ -64,7 +47,7 @@ class User1 extends ActiveRecord implements \yii\web\IdentityInterface
     // Find a user by username
    
 
-    public static function findByUsernamee($username)
+    public static function UserSignup($username)
     {
         $username = Yii::$app->request->post('SignupForm')['username'];
         $password = Yii::$app->request->post('SignupForm')['password'];
