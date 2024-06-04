@@ -78,7 +78,8 @@ function guest_page(){
         'options' => ['class' => 'navbar-nav'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'Signup', 'url' => ['/site/signup']],
+            ['label' => 'Signup', 'url' => ['/site/signedup']],
+            
 
             Yii::$app->user->isGuest
                 ? ['label' => 'Login', 'url' => ['/site/login']]
@@ -90,7 +91,12 @@ function guest_page(){
                     )
                     . Html::endForm()
                     . '</li>',
-                    ['label' => 'CurlPOST', 'url' => ['/curl/signupcurl']],
+                    ['label' => 'CurlPOST', 'url' => ['/curl/signedup']],
+                    ['label' => 'Specific ID', 'url' => ['/curl/speci']],
+                    // ['label' => 'Signup', 'url' => ['/site/signedup']],
+                    // ['label' => 'Signup', 'url' => ['/site/signedup']],
+                    // ['label' => 'Signup', 'url' => ['/site/signedup']],
+
                     ['label' => 'CurlAllDB', 'url' => ['/curl/showallusers']],
         ]
     ]);

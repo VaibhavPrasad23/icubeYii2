@@ -39,4 +39,23 @@ class SignupForm extends Model
         }
         return false;
        
-    }}
+    }
+
+    public function update()
+    {
+        $user = User1::UserUpdate($this->username);
+        if ($user === null) {
+            
+            return true;
+        }else{
+            $errorMessage = 'User registered';
+            $js = new \yii\web\JsExpression("alert('$errorMessage');");
+            Yii::$app->getView()->registerJs($js);
+           
+        }
+        return false;
+       
+    }
+}
+    
+

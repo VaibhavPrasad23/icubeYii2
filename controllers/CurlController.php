@@ -8,9 +8,15 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\SignupForm;
+use app\models\SpecuserForm;
+
 use app\models\LoginForm;
 use Yii;
 use yii\web\Response;
+use yii\base\DynamicModel;
+use app\models\User1;
+
+use function PHPUnit\Framework\isEmpty;
 
 /**
  * CurlController implements the CRUD actions for Uzer model.
@@ -35,6 +41,63 @@ class CurlController extends Controller
         );
     }
 
+
+
+     private function CurlGenerator($url, $method, $data = null)
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
+        curl_setopt($ch, CURLOPT_POST, true);
+      
+
+        if ($data !== null) {
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+            curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+        }
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        return $response;
+    }
+
+     public function actioncurl($url, $method = 'GET', $data = null)
+    {
+        $curl = curl_init($url);
+        
+        curl_setopt_array($curl, array(
+            
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'PUT',
+            
+            CURLOPT_HTTPHEADER => array(
+                'Accept: application/json',
+                'Content-Type: application/json'
+            ),
+        ));
+        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+        
+       curl_exec($curl);
+        
+        curl_close($curl);
+        
+    }
+
+
+
+
+
+
+
+
+
+
     /**
      * Lists all Uzer models.
      *
@@ -44,16 +107,7 @@ class CurlController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Uzer::find(),
-            /*
-            'pagination' => [
-                'pageSize' => 50
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'id' => SORT_DESC,
-                ]
-            ],
-            */
+
         ]);
 
         return $this->render('index', [
@@ -79,23 +133,8 @@ class CurlController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
-    {
-        $model = new Uzer();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        } else {
-            $model->loadDefaultValues();
-        }
-
-        return $this->renderAjax('tryform', [
-            'model' => $model,
-        ]);
-    }
-
+     
     /**
      * Updates an existing Uzer model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -171,18 +210,48 @@ class CurlController extends Controller
         return $this->render('signup1',['model'=>$model]);
     }
 
-      public function actionSpecuser()
-    {
-
-     $model = new SignupForm();
+ 
+    
    
-        if ($model->load(Yii::$app->request->post())&& $model->signup() ) 
+
+    public function actionShowallusers()
+    {      
+        
+        $data = $this->CurlGenerator('http://localhost:8090/api/web/messages/dball', 'GET', null);
+
+
+            echo '<pre>Database All Entries <br>';
+            echo json_encode(json_decode($data, true), JSON_PRETTY_PRINT);
+            // echo $data;
+            echo '</pre>';
+
+  
+    }
+
+
+
+    public function  actionSignedup()
+    { 
+        $session = Yii::$app->session;
+        if (!Yii::$app->user->isGuest) 
         {
-            //  $this->actionCreate();
-            return $this->redirect('login');
+            return $this->goBack();
         }
         
-      
+        $model = new SignupForm();
+        if (Yii::$app->session->get('username')==null)
+        {
+        if ($model->load(Yii::$app->request->post())&& $model->signup() ) 
+        {
+            $session->open();
+            return $this->redirect('index');
+        }
+        }
+        else
+        {
+           
+            return $this->redirect('index');
+        }
         
         $model->username = '';
         $model->password = '';
@@ -191,53 +260,35 @@ class CurlController extends Controller
     }
 
 
-    public function actionShowallusers()
-    {
 
-        $curl = curl_init();
-
-            curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://localhost:8090/api/web/messages/dball',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => array(
-                'Accept: application/json'
-            ),
-            ));
-            
-            
-            $response = curl_exec($curl);
-            $data = json_decode($response, true);
-
-
-            $response = curl_exec($curl);   
-
-            curl_close($curl);
-            echo '<pre>Database All Entries <br>';
-            echo json_encode($data, JSON_PRETTY_PRINT);
-            echo '</pre>';
-
-  
-    }
+    //////////////////////////////
 
 
 
+    public function actionSpeci(){
+        $funcc = New SpecuserForm();
+        $username = Yii::$app->request->post('username');
+        $id = Yii::$app->request->post('id');
+        $model = new SpecuserForm(['username' => $username, 'id' => $id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $mode = isEmpty($model->username);
+            if($mode==true){
+                return $funcc->callSpecuserID($model->id);
+            }else{
+                return $funcc->callSpecuser($model->username);
+            }
 
-    public function actionLsgin()
-    {
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
         }
-        return $this->renderAjax('tryform', [
-            'model' => $model,
-        ]);
+        return $this->render('signup12',['model'=>$model]);
+
     }
+    
+
+    
+
+    
+  
+
     
 
 }

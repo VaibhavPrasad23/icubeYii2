@@ -21,22 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'username',
-            'password',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Uzer $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            ],
-        ],
-    ]); ?>
+   
 
 
 </div>

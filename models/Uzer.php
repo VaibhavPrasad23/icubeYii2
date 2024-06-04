@@ -44,4 +44,32 @@ class Uzer extends \yii\db\ActiveRecord
             'password' => 'Password',
         ];
     }
+
+
+
+
+    public function  updater($id, $username, $password)
+    { 
+        $model = new Uzer();
+        $model->username = $username;
+        $model->id = $id;
+        $model->password = $password;
+        if ($model->load(Yii::$app->request->post())) {
+        $data = [
+            'id'=> $id,  
+            'username' => $username,
+            'password' => $password,
+        ];
+        $url =  'http://localhost:8090/api/web/messages/updateusers/'.$id;
+         
+        $response=$this->CurlGenerator($url, 'PUT', $data);
+        echo $response;
+        
+     
+    }
+        else echo "why";
+    }
+
+
+
 }
