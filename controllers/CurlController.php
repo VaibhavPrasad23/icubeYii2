@@ -26,20 +26,7 @@ class CurlController extends Controller
     /**
      * @inheritDoc
      */
-    public function behaviors()
-    {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
-                    ],
-                ],
-            ]
-        );
-    }
+
 
 
 
@@ -271,8 +258,7 @@ class CurlController extends Controller
         $id = Yii::$app->request->post('id');
         $model = new SpecuserForm(['username' => $username, 'id' => $id]);
         if ($model->load(Yii::$app->request->post())) {
-            $mode = isEmpty($model->username);
-            if($mode==true){
+            if(empty($model->username)){
                 return $funcc->callSpecuserID($model->id);
             }else{
                 return $funcc->callSpecuser($model->username);

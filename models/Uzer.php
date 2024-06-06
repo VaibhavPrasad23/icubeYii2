@@ -62,7 +62,10 @@ class Uzer extends \yii\db\ActiveRecord
         ];
         $url =  'http://localhost:8090/api/web/messages/updateusers/'.$id;
          
-        $response=$this->CurlGenerator($url, 'PUT', $data);
+        $model = new SignupForm();
+
+        $response = $model->CurlGenerator($url, 'PUT', $data);
+
         echo $response;
         
      

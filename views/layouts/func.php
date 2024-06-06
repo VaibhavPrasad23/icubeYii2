@@ -91,13 +91,16 @@ function guest_page(){
                     )
                     . Html::endForm()
                     . '</li>',
-                    ['label' => 'CurlPOST', 'url' => ['/curl/signedup']],
-                    ['label' => 'Specific ID', 'url' => ['/curl/speci']],
+                    ['label' => 'Curl', 'items' => [
+                        ['label' => 'New User', 'url' => ['/curl/signedup']],
+                        ['label' => 'Specific ID', 'url' => ['/curl/speci']],
+                        ['label' => 'Show All Data', 'url' => ['/curl/showallusers']],
+                    ]],
+
                     // ['label' => 'Signup', 'url' => ['/site/signedup']],
                     // ['label' => 'Signup', 'url' => ['/site/signedup']],
                     // ['label' => 'Signup', 'url' => ['/site/signedup']],
 
-                    ['label' => 'CurlAllDB', 'url' => ['/curl/showallusers']],
         ]
     ]);
 

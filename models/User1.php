@@ -61,29 +61,11 @@ class User1 extends ActiveRecord implements \yii\web\IdentityInterface
             'password' => $password
         ];
         
-        $curl = curl_init($url);
-        
-        curl_setopt_array($curl, array(
-            
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            
-            CURLOPT_HTTPHEADER => array(
-                'Accept: application/json',
-                'Content-Type: application/json'
-            ),
-        ));
-        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
-        
-        $response = curl_exec($curl);
-        
-        
-        curl_close($curl);
+        $model = new SignupForm();
+
+        $response = $model->CurlGenerator($url, 'POST', $data);
+
+        echo $response;
     }
     
 
@@ -103,58 +85,17 @@ class User1 extends ActiveRecord implements \yii\web\IdentityInterface
             'username' => $username
         ];
                 
-                $curl = curl_init($url);
-                
-                curl_setopt_array($curl, array(
                     
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING => '',
-                    CURLOPT_MAXREDIRS => 10,
-                    CURLOPT_TIMEOUT => 0,
-                    CURLOPT_FOLLOWLOCATION => true,
-                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => 'POST',
-                    
-                    CURLOPT_HTTPHEADER => array(
-                        'Accept: application/json',
-                        'Content-Type: application/json'
-                    ),
-                ));
-                curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
-                
-                $response = curl_exec($curl);
-                
-                
-                curl_close($curl);
+            $model = new SignupForm();
+
+            $response = $model->CurlGenerator($url, 'POST', $data);
+
+            return $response;
     }
     
 
 
-    public function specuserID($idz)
-    {
-    
-
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-        CURLOPT_URL => 'http://localhost:8090/api/web/messages/msgs/'. $idz,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'GET',
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-        echo $response;
-
-
-
-    }
+  
 
 
     /**
@@ -180,43 +121,7 @@ class User1 extends ActiveRecord implements \yii\web\IdentityInterface
     {
         return $this->authKey === $authKey;
     }
-  
-    
 
-
-
-
-
-
-    ////////////////////////
-
-
-    public function callSpecuser($id)
-    {
- 
-        
-            $url = 'http://localhost:8090/api/web/messages/msgs/id/'. $id;
-        
-        
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-        CURLOPT_URL => $url,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'GET',
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-        echo $response;
-
-    }
     
     
 }
